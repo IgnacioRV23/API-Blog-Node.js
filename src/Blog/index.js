@@ -10,7 +10,7 @@ module.exports.BlogAPI = (app) => {
     router
     .get("/", BlogController.getArticles)
     .get("/:id", BlogController.getArticle)
-    // .post("/", BlogController.createArticle)
+    .post("/", BlogController.createArticle)
     // .post("/update/:id", BlogController.updateArticle)
     // .post("/delete/:id", BlogController.deleteArticle);
 

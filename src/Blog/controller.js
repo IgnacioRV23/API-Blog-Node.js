@@ -8,7 +8,7 @@ module.exports.BlogController = {
         try {
             //Se debe de llamar a la funcion del servicio de manera asincrona.
             let articles = await BlogService.getAll();
-            
+
             //Se realiza el response de la peticion.
             res.status(200).json({
                 message: "Lista de articulos",
@@ -24,16 +24,16 @@ module.exports.BlogController = {
     //Obtiene uno de los articulos especificado por medio de su objectID.
     getArticle: async (req, res) => {
         try {
-            //Obtiene el ID enviado por medio de la URL por medio de la propiedad params,
-            let {params:{id}} = req;
+            //Obtiene el ID enviado por medio de la URL por medio de la propiedad params.
+            let { params: { id } } = req;
 
             //Se llama a la funcion del servicio que obtiene el articulo.
             let article = await BlogService.getById(id);
 
             //Se realiza el response de la peticion.
             res.status(200).json({
-                message:"Articulo encontrado",
-                body:article
+                message: "Articulo encontrado",
+                body: article
             });
         } catch (error) {
             //Captura los errores y envia un response 500.
@@ -41,4 +41,21 @@ module.exports.BlogController = {
             console.log(`scr/Blog/controller/Error: ${error}`);
         }
     },
+
+    createArticle: async (req, res) => {
+        try {
+            //Obtiene el nuevo articulo por medio del body de la solicitud.
+            let { body: newArticle } = req;
+
+            //Se envia el nuevo articulo como parametro de la funcion para realizar la creacion en el servicio.
+            await BlogService.create(newArticle);
+
+            //Se envia una respuesta, con un status 201, que significa que se realizo un insert.
+            res.status(201).json({ message: "Articulo creado" });
+        } catch (error) {
+            //Captura los errores y envia un response 500.
+            res.status(500).json({ message: "Internal Server Error" });
+            console.log(`scr/Blog/controller/Error: ${error}`);
+        }
+    }
 }

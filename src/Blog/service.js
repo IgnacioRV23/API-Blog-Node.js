@@ -29,8 +29,18 @@ const getById = async (id) => {
     return result;
 };
 
+//Servicio que realiza el insert de un nuevo articulo a la coleccion.
+const create = async (newArticle) => {
+    //Solicita la coleccion a la base de datos.
+    const collection = await Database.connect(collectionDB);
+
+    //Se envia como parametro el nuevo articulo que ya se encuentra formateado.
+    await collection.insertOne(newArticle);
+};
+
 //Se realiza la exportacion de las funciones.
 module.exports.BlogService = {
     getAll,
-    getById
+    getById,
+    create
 };

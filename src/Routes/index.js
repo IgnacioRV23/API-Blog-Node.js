@@ -10,8 +10,23 @@ module.exports.IndexAPI = (app) => {
 
     router.get("/", (req, res) => {
         const menu = {
-            //products:`http://${req.headers.host}/api/blog/`
-            products:`localhost:3000/api/blog/`
+            GetAll: {
+                'Metodo':'Get',
+                'Ruta': `http://${req.headers.host}/api/blog/`,
+                'Descripcion': 'Obtiene todos los elementos de la base de datos.'
+            },
+
+            GetById: {
+                'Metodo':'Get',
+                'Ruta': `http://${req.headers.host}/api/blog/:id`,
+                'Descripcion': 'Obtiene un elemento de la base de datos, se debe de especificar el id en la ruta de la peticion.'
+            },
+
+            Create: {
+                'Metodo':'Post',
+                'Ruta': `http://${req.headers.host}/api/blog/`,
+                'Descripcion': 'Realiza la creacion de un nuevo elemento en la base de datos, se debe de enviar un json con el nuevo registro por medio del body de la peticion.'
+            },
         };
         res.status(200).json({menu});
     });
