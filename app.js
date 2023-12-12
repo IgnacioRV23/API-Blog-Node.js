@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 
-const {IndexAPI, NotFoundAPI} = require("./src/Routes");
+const { IndexAPI, NotFoundAPI } = require("./src/Routes");
 
 const { BlogAPI } = require("./src/Blog/index");
 

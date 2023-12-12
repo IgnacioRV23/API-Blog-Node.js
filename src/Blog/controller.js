@@ -71,7 +71,7 @@ module.exports.BlogController = {
 
             //Se utiliza la funcion encargada de actualizar el registro.
             //Se envia su objectID y la informacion actualizada.
-            await BlogService.update(id, dataArticle);
+            await BlogService.updateById(id, dataArticle);
 
             res.status(200).json({ message: "Articulo actualizado" });
         } catch (error) {
@@ -80,4 +80,20 @@ module.exports.BlogController = {
             console.log(`scr/Blog/controller/Error: ${error}`);
         }
     },
+
+    deleteArticle: async (req, res) => {
+        try {
+            //Obtiene el ID enviado por medio de la URL por medio de la propiedad params.
+            let { params: { id } } = req;
+
+            //Se realiza el llamado del servicio que se encarga de eliminar el registro en base al id enviado como parametro.
+            await BlogService.deleteByID(id);
+
+            res.status(200).json({ message: "Articulo eliminado" });
+        } catch (error) {
+            //Captura los errores y envia un response 500.
+            res.status(500).json({ message: "Internal Server Error" });
+            console.log(`scr/Blog/controller/Error: ${error}`);
+        }
+    }
 }
