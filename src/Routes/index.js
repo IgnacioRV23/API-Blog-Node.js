@@ -27,6 +27,12 @@ module.exports.IndexAPI = (app) => {
                 'Ruta': `http://${req.headers.host}/api/blog/`,
                 'Descripcion': 'Realiza la creacion de un nuevo elemento en la base de datos, se debe de enviar un json con el nuevo registro por medio del body de la peticion.'
             },
+
+            Update: {
+                'Metodo':'Post',
+                'Ruta': `http://${req.headers.host}/api/blog/update/:id`,
+                'Descripcion': 'Realiza la actualizacion de un elemento existente en la base de datos, se debe de enviar un json con la informacion actualizada del registro por medio del body de la peticion.'
+            },
         };
         res.status(200).json({menu});
     });

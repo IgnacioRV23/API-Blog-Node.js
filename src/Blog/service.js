@@ -38,9 +38,27 @@ const create = async (newArticle) => {
     await collection.insertOne(newArticle);
 };
 
+//Servicio que realiza la actualizacion de un articulo existente en la coleccion de la base de datos.
+const update = async (id, dataArticle) => {
+    //Solicita la coleccion a la base de datos.
+    const collection = await Database.connect(collectionDB);
+
+    //Se crea una nueva instancia del objectID
+    let object = new ObjectId(id);
+
+    //Se llama a la funcion encargada de realizar la actualizacion en la base de datos.
+    //Primero se realiza la busqueda del registro, por medio de su objectID.
+    //Posteriormente se envia el json con la nueva informacion actualizada.
+    await collection.updateOne(
+        {_id:object},
+        {$set:{...dataArticle}}
+    );
+}
+
 //Se realiza la exportacion de las funciones.
 module.exports.BlogService = {
     getAll,
     getById,
-    create
+    create,
+    update
 };

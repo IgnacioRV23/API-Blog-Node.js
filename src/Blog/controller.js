@@ -42,6 +42,7 @@ module.exports.BlogController = {
         }
     },
 
+    //Obtiene uno de los articulos especificado por medio de su objectID.
     createArticle: async (req, res) => {
         try {
             //Obtiene el nuevo articulo por medio del body de la solicitud.
@@ -57,5 +58,26 @@ module.exports.BlogController = {
             res.status(500).json({ message: "Internal Server Error" });
             console.log(`scr/Blog/controller/Error: ${error}`);
         }
-    }
+    },
+
+    //Obtiene uno de los articulos especificado por medio de su objectID y realiza una actualizacion de su informacion.
+    updateArticle: async (req, res) => {
+        try {
+            //Obtiene el ID enviado por medio de la URL por medio de la propiedad params.
+            let { params: { id } } = req;
+
+            //Obtiene la nueva informacion del articulo que se desea actualizar por medio del body de la solicitud.
+            let { body: dataArticle } = req;
+
+            //Se utiliza la funcion encargada de actualizar el registro.
+            //Se envia su objectID y la informacion actualizada.
+            await BlogService.update(id, dataArticle);
+
+            res.status(200).json({ message: "Articulo actualizado" });
+        } catch (error) {
+            //Captura los errores y envia un response 500.
+            res.status(500).json({ message: "Internal Server Error" });
+            console.log(`scr/Blog/controller/Error: ${error}`);
+        }
+    },
 }

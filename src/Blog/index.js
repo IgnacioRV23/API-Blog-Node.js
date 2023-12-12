@@ -11,7 +11,7 @@ module.exports.BlogAPI = (app) => {
     .get("/", BlogController.getArticles)
     .get("/:id", BlogController.getArticle)
     .post("/", BlogController.createArticle)
-    // .post("/update/:id", BlogController.updateArticle)
+    .post("/update/:id", BlogController.updateArticle)
     // .post("/delete/:id", BlogController.deleteArticle);
 
     app.use("/api/blog", router);
